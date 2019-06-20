@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
+	<form th:action="@{/inviaRichiesta}" method="POST"
+		th:object="${richiesta}">
+		<table>
+			<tr>
+				<td>Nome:</td>
+				<td><input type="text" th:field="*{nomeUtente}" /></td>
+				<td th:if="${#fields.hasErrors('nomeUtente')}"
+					th:errors="*{nomeUtente}"></td>
+			</tr>
+			<tr>
+				<td>Cognome:</td>
+				<td><input type="text" th:field="*{cognomeUtente}" /></td>
+				<td style="color: red;"
+					th:if="${#fields.hasErrors('cognomeUtente')}"
+					th:errors="*{cognomeUtente}"></td>
+			</tr>
+		</table>
+		<div class="album py-5 bg-light">
+
+			<div class="container">
+
+				<div class="row">
+
+					<div class="col-md-4" th:each="fotografia:${fotoRichieste}"
+						style="width: 100%; height: 225;">
+						<div class="card mb-4 shadow-sm">
+							<img th:src="${fotografia.url}" class="d-block w-75 myImage"
+								alt="..."
+								style="display: block; margin-left: auto; margin-right: auto;">
+							<div class="card-body">
+								<p class="card-text" th:text="${fotografia.nome}"></p>
+								<p class="card-text"
+									th:text="'Costo: '+  ${fotografia.prezzo} + '€'"></p>
+								<div class="d-flex justify-content-between align-items-center">
+									<small class="text-muted"
+										th:text="${fotografia.album.dataCaricamento}"></small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<input type="submit" class="btn btn-sm btn-outline-primary"
+						value="Invia richiesta"></input>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>

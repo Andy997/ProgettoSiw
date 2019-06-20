@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div th:each="richiesta:${richieste}">
+		
+		Richiesta <div th:text="${richiesta.id}"></div>
+		<div>
+			Nome utente: <span th:text="${richiesta.nomeUtente}"></span>
+		</div>
+		<div>
+			Cognome utente: <span th:text="${richiesta.cognomeUtente}"></span>
+		</div>
+		<div class="album py-5 bg-light">
+
+			<div class="container">
+
+				<div class="row">
+
+					<div class="col-md-4" th:each="fotografia:${richiesta.fotografie}"
+						style="width: 100%; height: 225;">
+						<div class="card mb-4 shadow-sm">
+							<img th:src="${fotografia.url}" class="d-block w-75 myImage"
+								alt="..."
+								style="display: block; margin-left: auto; margin-right: auto;">
+							<div class="card-body">
+								<p class="card-text" th:text="${fotografia.nome}"></p>
+								<p class="card-text"
+									th:text="'Costo: '+  ${fotografia.prezzo} + '€'"></p>
+								<div class="d-flex justify-content-between align-items-center">
+									<small class="text-muted"
+										th:text="${fotografia.album.dataCaricamento}"></small>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a class="btn btn-primary" th:href="@{/login}" role="button">Login page</a>
+	</div>
+</body>

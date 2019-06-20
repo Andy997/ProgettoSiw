@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+
+<body>
+	<div th:object="${fotografia}">
+		<h4>Fotografia:</h4>
+		<div >
+		Nome:  <span th:text="*{nome}">qui-va-nome</span>
+		</div>
+		<img alt="" th:src="@{*{url}}">
+		<a class="btn btn-primary" th:href="@{/login}" role="button">Login page</a>
+	</div>
+</body>
+</html>
